@@ -9,7 +9,7 @@ https://developer.apple.com/library/mac/documentation/AppleApplications/Conceptu
 Go ahead and modify the index.html file as you see fit. I've provided a very basic API for detecting both touch events and a handler for changes in pressure.
 
 ## It crashes!
-I deliberately made the app crash when 3D Touch is not available or enabled. Don't hesitate to to flag it up!
+I deliberately made the app crash when 3D Touch is not available or enabled. Don't hesitate to create an issue if something's not right!
 
 ## Credits
 Thanks to Thomas Zhao (thomasrzhao) for subclassing UIGestureRecognizer to allow native touch APIs to other views other than the main view controller.
