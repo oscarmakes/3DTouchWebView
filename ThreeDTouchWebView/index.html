@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
+        <title>Index</title>
+        <style>
+            * { margin: 0; padding: 0; border: 0; outline: 100%; font-size: 100%; box-sizing: border-box; -webkit-text-size-adjust: 100%; }
+            html, body, .c-container { width: 100%; height: 100%; }
+            body { display: table; font-family: '-webkit-system-font'; }
+            .c-container { display: table-cell; vertical-align: middle; text-align: center; }
+            .c-well { background: #f7f8f9; padding: 10px;}
+            .c-label { padding: 10px; font: -apple-system-short-headline; }
+            .c-message { position: fixed; left: 20px; right: 20px; bottom: 20px; }
+        </style>
+    </head>
+    <body>
+        <div class="c-container">
+            <div class="c-container__content">
+                <p class="c-label">Touch event</p>
+                <p class="c-well" id="event">None</p>
+                <p class="c-label">Pressure</p>
+                <p class="c-well" id="output">0</p>
+            </div>
+        </div>
+        <div class="c-message">
+            To alter the sensitivity, go to the Settings app &rarr; General &rarr; Accessibility &rarr; 3D Touch and move the slider according to your preferences.
+        </div>
+        <script>
+            
+            var forceDetect = false,
+                forceValue = 0;
+                
+            window.addEventListener("touchstart", function(){
+                forceDetect = true;
+                document.getElementById("event").innerHTML = "Begun";
+                window.requestAnimationFrame(forceHandler);
+            });
+            
+            window.addEventListener("touchend", function(){
+                forceDetect = false;
+                forceValue = 0;
+                document.getElementById("event").innerHTML = "Ended";
+            });
+        
+            
+            function forceHandler() {
+                if (forceDetect) {
+                    document.getElementById("output").innerHTML = forceValue.toFixed(6);
+                    
+                    if (forceValue > 0.1 && forceValue < 1) {
+                        document.getElementById("event").innerHTML = "Pressure applied";
+                    } else if (forceValue >= 1) {
+                        document.getElementById("event").innerHTML = "Maximum Pressure applied";
+                    }
+                    
+                    requestAnimationFrame(forceHandler);
+                }
+            }
+        
+        </script>
+    </body>
+</html>
