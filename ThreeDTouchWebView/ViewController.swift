@@ -12,6 +12,7 @@ import WebKit
 class ViewController: UIViewController, WKNavigationDelegate {
     
     var webView: WKWebView?
+    var lastForceValue: CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +58,14 @@ class ViewController: UIViewController, WKNavigationDelegate {
         switch forcePressRecognizer.state {
         case .Changed:
             let percentageComplete = (forcePressRecognizer.averageRelativeForce);
-            webView!.evaluateJavaScript("forceValue = \(percentageComplete)", completionHandler: nil)
-            print("\(percentageComplete)");
+            
+            if (lastForceValue != percentageComplete) {
+                
+                lastForceValue = percentageComplete
+                
+                webView!.evaluateJavaScript("forceValue = \(percentageComplete)", completionHandler: nil)
+            }
+            
         default: break;
         }
     }
